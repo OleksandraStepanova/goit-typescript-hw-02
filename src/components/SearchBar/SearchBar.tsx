@@ -7,18 +7,22 @@ type SearchBarProps = {
     onSubmit: (value: string) => void;
 }
 
-export default function SearchBar({ onSubmit }:SearchBarProps) {
+export default function SearchBar({ onSubmit }: SearchBarProps) {
+      const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();    
 
-    const handleSubmit = (e:FormEvent<HTMLFormElement>):void => {
-        e.preventDefault();
-        const value = e.target.query.value.trim();
-        if (!value) {            
+        const formData = new FormData(e.currentTarget); 
+        const value = formData.get('query') as string;      
+        
+        if (!value.trim()) {            
             toast.error('Enter your query!');
             return;
         }
-        onSubmit(value)
-        e.target.reset();
+        onSubmit(value.trim());       
     }
+
+
+
     return (
         <header className={css.header}>
             <form className={css.form} onSubmit={handleSubmit}>

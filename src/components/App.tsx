@@ -7,7 +7,7 @@ import Loader from "./Loader/Loader";
 import LoadMoreBtn from "./LoadMoreBtn/LoadMoreBtn";
 import ErorrMessage from "./ErorrMessage/ErorrMessage";
 import ImageModal from "./ImageModal/ImageModal";
-import { Image } from "./App.types";
+import { ApiResponse, Image } from "./App.types";
 
 
 
@@ -18,7 +18,7 @@ export default function App() {
   const [isLoader, setLoader] = useState<boolean>(false);
   const [total, setTotal] = useState<number>(0);
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
-  const[currentImage,setCurrentImage]=useState<Image>();
+  const[currentImage,setCurrentImage]=useState<Image>(null);
 
   useEffect(() => {
     if (!query) return;
