@@ -7,15 +7,18 @@ import Loader from "./Loader/Loader";
 import LoadMoreBtn from "./LoadMoreBtn/LoadMoreBtn";
 import ErorrMessage from "./ErorrMessage/ErorrMessage";
 import ImageModal from "./ImageModal/ImageModal";
+import { Image } from "./App.types";
+
+
 
 export default function App() {
-  const [query, setQuery] = useState('');
-  const [page, setPage] = useState(1);
-  const [data, setData] = useState([]);
-  const [isLoader, setLoader] = useState(false);
-  const [total, setTotal] = useState(0);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const[currentImage,setCurrentImage]=useState();
+  const [query, setQuery] = useState<string>('');
+  const [page, setPage] = useState<number>(1);
+  const [data, setData] = useState<Image[]>([]);
+  const [isLoader, setLoader] = useState<boolean>(false);
+  const [total, setTotal] = useState<number>(0);
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const[currentImage,setCurrentImage]=useState<Image>();
 
   useEffect(() => {
     if (!query) return;
@@ -27,8 +30,10 @@ export default function App() {
           return [...prevState, ...value.results];
         });             
         setTotal(value.total_pages);
-      } catch(error) {
-        toast.error(error.message);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          toast.error(error.message);
+        }        
       } finally {
         setLoader(false);
       }      
@@ -36,7 +41,7 @@ export default function App() {
     handleGallery();
   },[page, query])
   
-  const handleSubmit = (value) => {
+  const handleSubmit = (value:string) => {
     setData([]);
     setQuery(value);
     setPage(1);
@@ -47,7 +52,7 @@ export default function App() {
     setPage(page + 1);   
   }
 
-  const openModal = (image) => {
+  const openModal = (image:Image) => {
     setCurrentImage(image);    
     setModalIsOpen(true);
   }

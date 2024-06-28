@@ -1,10 +1,15 @@
 import { FiSearch } from 'react-icons/fi'
 import toast from 'react-hot-toast';
 import css from './SearchBar.module.css'
+import { FormEvent } from 'react';
 
-export default function SearchBar({ onSubmit }) {
+type SearchBarProps = {
+    onSubmit: (value: string) => void;
+}
 
-    const handleSubmit = (e) => {
+export default function SearchBar({ onSubmit }:SearchBarProps) {
+
+    const handleSubmit = (e:FormEvent<HTMLFormElement>):void => {
         e.preventDefault();
         const value = e.target.query.value.trim();
         if (!value) {            

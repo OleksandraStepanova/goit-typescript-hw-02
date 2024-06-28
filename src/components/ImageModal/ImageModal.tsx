@@ -1,9 +1,14 @@
 import ReactModal from 'react-modal';
+import { Image } from '../App.types';
 ReactModal.setAppElement('#root');
 
+type ImageModalProps = {
+    isOpen: boolean;
+    isClose: () => void;
+    value: Image ;
+}
 
-export default function ImageModal({ isOpen, isClose, value }) {
-  
+export default function ImageModal({ isOpen, isClose, value }:ImageModalProps) {  
 
     return (
         <ReactModal
