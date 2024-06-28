@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ApiResponse, Image } from "../components/App.types";
+import { ApiResponse } from "../components/App.types";
 
 
 const API_KEY = 'OAHwj3sXlSKWKQ6-XAkKr3pwCLMCCoi4KgLInJRzqyc';
