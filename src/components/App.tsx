@@ -18,7 +18,7 @@ export default function App() {
   const [isLoader, setLoader] = useState<boolean>(false);
   const [total, setTotal] = useState<number>(0);
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
-  const[currentImage,setCurrentImage]=useState<Image>(null);
+  const[currentImage,setCurrentImage]=useState<Image>();
 
   useEffect(() => {
     if (!query) return;
@@ -69,7 +69,7 @@ export default function App() {
       {query && total===0 && <ErorrMessage/>}
       {isLoader && <Loader />}      
       {data.length > 0 && total > page && <LoadMoreBtn onClick={handleLoadMore} />}
-      <ImageModal isOpen={modalIsOpen} isClose={closeModal} value={currentImage}/>
+      {currentImage&&<ImageModal isOpen={modalIsOpen} isClose={closeModal} value={currentImage}/>}
     </>
   )
 }

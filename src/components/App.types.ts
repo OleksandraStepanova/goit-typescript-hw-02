@@ -15,4 +15,4 @@ export type Image = {
         username: string;
     };
     likes?: number;
-}|null
+}
