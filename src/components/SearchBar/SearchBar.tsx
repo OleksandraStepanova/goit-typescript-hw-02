@@ -9,16 +9,17 @@ type SearchBarProps = {
 
 export default function SearchBar({ onSubmit }: SearchBarProps) {
       const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();    
-
-        const formData = new FormData(e.currentTarget); 
-        const value = formData.get('query') as string;      
-        
-        if (!value.trim()) {            
+          e.preventDefault();    
+          
+          const form = e.target as HTMLFormElement;
+          const value = form.query.value.trim();
+   
+        if (!value) {            
             toast.error('Enter your query!');
             return;
         }
-        onSubmit(value.trim());       
+          onSubmit(value);
+          form.reset();
     }
 
 
